@@ -1,0 +1,13 @@
+//Die Funktion inGame ruft alle Funktionen auf, die das Spiel benötigt.
+void inGame() {
+  //Funktion die das Spiel (Spieler, Hintergrund,etc) zeichnet.
+  gameLoad();
+  //rundenbasierte Steuerung zweier Spieler.
+  playerControls();
+  //Spielgrenzen.
+  playerBorders();
+  //Pausemenü
+  inGameKeys();
+  //Tankanzeige
+  tank();
+}
