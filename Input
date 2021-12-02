@@ -1,0 +1,39 @@
+//Dieser Code ist für die Wechsel zwischen den Zuständen Startmenü, Spiel und Pausemneü zuständig.
+void keyPressed() {
+  // von Start zu Game
+  if (inStart) {
+    if (keyPressed && !(key=='p')) {
+
+      inGame = true;
+      inStart = false;
+    }
+  }
+  // Game zu  Pause
+  if (inGame) {
+    if (key=='p') {
+      inPause = true;
+      inGame = false;
+      //Pause an Sound
+      spielmusik = new SoundFile(this, "pauseon.mp3");
+      spielmusik.play();
+      spielmusik.amp(0.5);
+    }
+  }
+  if (inPause) {
+    // Pause zu Menu
+    if (key == 'm') {
+      // Pause zu Menu
+      inPause = false;
+      inStart = true;
+    }
+    // Pause zu Game
+    if (key=='l') {
+      inGame = true;
+      inPause = false;
+      //Pause aus Sound.
+      spielmusik = new SoundFile(this, "pauseoff.mp3");
+      spielmusik.play();
+      spielmusik.amp(0.5);
+    }
+  }
+}
