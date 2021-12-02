@@ -1,0 +1,36 @@
+//Funktion für die Tankanzeige(Reichweite) der beiden Spieler.
+void tank() {
+  //Tankanzeige Spieler 1
+  fill(#03fc07);
+  if (distanceTraveled >= 90) {
+    fill(#FAEE00);
+  }
+  if (distanceTraveled >= 160) {
+    fill(#FA0000);
+  }
+
+  if (turn ==true) {
+    rectMode(CORNER);
+    rect((width/8.3478)-1 ,(height/24)-1,width/4.27 - distanceTraveled*1.34, height/21.43);
+      
+
+}
+  //Tankanzeige Spieler 2
+  fill(#03fc07);
+  if (distanceTraveled >= 90) {
+    fill(#FAEE00);
+  }
+  if (distanceTraveled >= 160) {
+    fill(#FA0000);
+  }
+
+  if (turn ==false) {
+    rectMode(CORNERS);
+       rect(width/1.55 + distanceTraveled*1.34, height/24, width/1.14, height/11.36);
+    rectMode(CORNER);
+  }
+}
+
+void healthbar () {
+  //Hier kommt die healthbar
+}
