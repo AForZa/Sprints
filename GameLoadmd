@@ -1,0 +1,114 @@
+# Sprint 2 latest Version
+Verschiedensten Projekte reinschicken
+
+
+//Definiert alle Funktionen, die in inGame aufgerufen werden. Die Grundmechaniken des Spiels.
+//Funktion die den Hintergrund, Boden und Spieler zeichnet.
+void gameLoad() {
+  image(img, 0, 0);
+  textAlign(CENTER);
+  noCursor();
+  strokeWeight(5);
+  strokeWeight(0);
+  //fill(#F6FF03);
+  //ellipse(0, 0, width / 5.3, height / 3);  //Sonne
+  strokeWeight(1);
+
+  //Boden
+  fill(#26C652);
+  rect(0, height * 0.75, width, height);
+
+  //Spielfigur 1
+  fill(#FF0320);
+  rect(p1Attributes[0], p1Attributes[1], p1Attributes[2], p1Attributes[3]);
+
+  //Spielfigur 2
+  fill(#5A03FF);
+  rect(p2Attributes[0], p2Attributes[1], p2Attributes[2], p2Attributes[3]);
+}
+//Funktion, um Spielsteuerung im Spiel anzuzeigen.
+void inGameKeys() {
+  fill(33);
+  stroke(150, 50, 50);
+  strokeWeight(4);
+  rect(width * 0.375, height * 0.83, width / 4, height * 0.08);
+  strokeWeight(1);
+  stroke(0);
+  fill(150, 50, 50);
+  textSize(24);
+
+  text("Drücke P, um zu pausieren.", width / 2, height * 0.9);
+  text("Benutze A und D, um dich zu bewegen!", width / 2, height * 0.85);
+}
+//Diese Funktion definiert nicht passierbare Grenzen für die beiden Spieler.
+void playerBorders() {
+
+  //linke Grenze Spieler 1
+  if (p1Attributes[0] <= 5) {
+    p1Attributes[0] = 10;
+    distanceTraveled--;
+  }
+  //rechte Grenze Spieler 1 (Mitte)
+  if (p1Attributes[0] >= width/2 - p1Attributes[2])
+  {
+    p1Attributes[0] -= 1;
+    distanceTraveled--;
+  }
+  //linke Grenze Spieler 2 (Mitte)
+  if (p2Attributes[0] <= width/2)
+  {
+    p2Attributes[0] += 1;
+    distanceTraveled--;
+  }
+  //rechte Grenze Spieler 2
+  if (p2Attributes[1] >= width)
+  {
+    p2Attributes[0] = width;
+    distanceTraveled--;
+  }
+}
+//Funktion für die Steuerung der Spieler und den Turnswitch.
+void playerControls() {
+  //Steuerung Spieler 1, wenn am Zug
+  if (turn == true) {
+    fill(#FF0320);
+    text("Spieler 1 ist am Zug!", width / 2, height * 0.8);
+    if (keyPressed) {
+      if (key == 'a') {
+        p1Attributes[0]--;
+        distanceTraveled++;
+      }
+    }
+    if (keyPressed) {
+      if (key == 'd') {
+        p1Attributes[0]++;
+        distanceTraveled++;
+      }
+    }
+    if (distanceTraveled==MAX_DISTANCE_TRAVELLED) {
+      turn=false;
+      distanceTraveled=0;
+    }
+  }
+  //Steuerung Spieler 2, wenn am Zug
+  if (turn == false) {
+    fill(#5A03FF);
+    text("Spieler 2 ist am Zug!", width / 2, height * 0.8);
+    if (keyPressed) {
+      if (key == 'a') {
+        p2Attributes[0]--;
+        distanceTraveled++;
+      }
+    }
+    if (keyPressed) {
+      if (key == 'd') {
+        p2Attributes[0]++;
+        distanceTraveled++;
+      }
+    }
+    if (distanceTraveled==MAX_DISTANCE_TRAVELLED) {
+      turn=true;
+      distanceTraveled=0;
+    }
+  }
+}
